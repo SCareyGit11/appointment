@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>Appointments Exam</title>
+	</head>
+	<body>
+		<h4> Hello, {{ users.first_name }}</h4>
+		<div id=wrapper>
+					
+					
+					
+					<p><a href='/logout'>Logout</a></p>
+
+		
+		<table id='today'>
+				<thead>Here are your Appointments for Today, {{ now }}</thead>
+				<tbody>	
+					<tr>
+					<th>  Task  </th>
+					
+					<th>  Time </th>
+					<th>  Status </th>
+					<th>  Action </th>
+					</tr>
+					{% for i in appointments %}
+					
+					<tr>  
+					<td>{{i.task}}</td> 
+					<td>{{i.time}}</td>
+					<td>{{i.status}}</td>
+					<td><a href="/edit/{{i.id}}">Edit</td>
+					<td><a href='/delete/{{i.id}}'>Delete</a></td>
+					</tr>
+					{% endfor %}
+				</tbody>
+			</table>
+		
+
+			<table id='other'>
+				<thead>Your Other Appointments</thead>
+				<tbody>	
+					<tr>
+					<th>  Task  </th>
+					
+					<th>  Date </th>
+					<th>  Time </th>
+					</tr>
+					{% for i in appointments %}
+					<tr>  
+					<td>{{i.task}}</td> 
+					<td>{{i.date}}</td>
+					<td>{{i.time}}</td>
+					
+					</tr>
+					{% endfor %}
+				</tbody>
+			</table>
+			<form action='/add' method='post'>
+					{% csrf_token %}
+					<h4>Add Appointment</h4>
+					<label for='date'>Date</label>
+					<input type='date' name="date"><br>
+					<label for='task'>Tasks</label>
+					<input type='text' name="task"><br>
+					<input type="submit" value="Add">
+				
+			</form>
+
+		</div>
+	</body>
+</html>
